@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "688c91c2-6ade-4247-8a84-b28efc11b753",
+		"name": "spring rest",
+		"description": "spring rest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "init stocklevels",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": 1001,\n        \"product\": \"product1\",\n        \"warehouse\": \"warehouse1\",\n        \"level\": 33\n    },\n    {\n        \"id\": 1002,\n        \"product\": \"product1\",\n        \"warehouse\": \"warehouse2\",\n        \"level\": 43\n    },\n    {\n        \"id\": 1003,\n        \"product\": \"product1\",\n        \"warehouse\": \"warehouse3\",\n        \"level\": 59\n    },\n    {\n        \"id\": 1004,\n        \"product\": \"product2\",\n        \"warehouse\": \"warehouse1\",\n        \"level\": 54\n    },\n    {\n        \"id\": 1005,\n        \"product\": \"product2\",\n        \"warehouse\": \"warehouse2\",\n        \"level\": 92\n    },\n    {\n        \"id\": 1006,\n        \"product\": \"product3\",\n        \"warehouse\": \"warehouse1\",\n        \"level\": 21\n    },\n    {\n        \"id\": 1007,\n        \"product\": \"product3\",\n        \"warehouse\": \"warehouse2\",\n        \"level\": 44\n    },\n    {\n        \"id\": 1008,\n        \"product\": \"product3\",\n        \"warehouse\": \"warehouse3\",\n        \"level\": 42\n    },\n    {\n        \"id\": 1009,\n        \"product\": \"product3\",\n        \"warehouse\": \"warehouse4\",\n        \"level\": 24\n    }\n]"
+				},
+				"url": {
+					"raw": "http://{{server}}:{{port}}/stocklevel/init",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"stocklevel",
+						"init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get specific stocklevel",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{server}}:{{port}}/stocklevel/1001",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"stocklevel",
+						"1001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all stocklevels",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{server}}:{{port}}/stocklevel/all",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"stocklevel",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
