@@ -4,18 +4,26 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Map;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(collection = "StockLevel")
 public class StockLevel {
 
     @Getter
     @Setter
-    private String id;
+    private Long id;
 
     @Getter
     @Setter
-    private Map<String, Integer> warehouses;
+    private String product;
+
+    @Getter
+    @Setter
+    private String warehouse;
+
+    @Getter
+    @Setter
+    private int level;
 }

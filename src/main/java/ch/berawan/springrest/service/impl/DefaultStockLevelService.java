@@ -1,32 +1,33 @@
 package ch.berawan.springrest.service.impl;
 
 import ch.berawan.springrest.data.dto.StockLevel;
+import ch.berawan.springrest.data.repository.StockLevelRepository;
 import ch.berawan.springrest.service.StockLevelService;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import javax.annotation.Resource;
+import java.util.List;
 
 public class DefaultStockLevelService implements StockLevelService {
 
+    @Resource
+    private StockLevelRepository stockLevelRepository;
+
 
     @Override
-    public Set<StockLevel> getAll() {
+    public StockLevel getById(final long id) {
 
-        final Set<StockLevel> stockLevels = new HashSet<>();
-        final Map<String, Integer> wareHouses = new HashMap<>();
+        return stockLevelRepository.findFirstById(id);
+    }
 
-        wareHouses.put("warehouse 1", 2);
-        wareHouses.put("warehouse 2", 4);
-        wareHouses.put("warehouse 3", 25);
-        wareHouses.put("warehouse 4", 3);
-        wareHouses.put("warehouse 5", 77);
-        wareHouses.put("warehouse 6", 34);
-        wareHouses.put("warehouse 7", 42);
+    @Override
+    public List<StockLevel> getAll() {
 
-        stockLevels.add(new StockLevel("product1", wareHouses));
+        return stockLevelRepository.findAll();
+    }
 
-        return stockLevels;
+    @Override
+    public List<StockLevel> addStockLevels(final List<StockLevel> stockLevels) {
+
+        return stockLevelRepository.saveAll(stockLevels);
     }
 }
