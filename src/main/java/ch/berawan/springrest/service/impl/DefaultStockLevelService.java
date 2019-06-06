@@ -6,6 +6,7 @@ import ch.berawan.springrest.service.StockLevelService;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DefaultStockLevelService implements StockLevelService {
 
@@ -28,6 +29,18 @@ public class DefaultStockLevelService implements StockLevelService {
     @Override
     public List<StockLevel> addStockLevels(final List<StockLevel> stockLevels) {
 
-        return stockLevelRepository.saveAll(stockLevels);
+        return stockLevelRepository.saveAll(stockLevels).stream().sorted(
+                (final StockLevel o1, final StockLevel o2) -> {
+                    if (o1.getProduct().compareTo(o2.getProduct()) > 0)
+                        return 1;
+                    else
+                        return -1;
+                }
+        ).collect(Collectors.toList());
+    }
+
+    @Override
+    public StockLevel addStockLevel(final StockLevel stockLevel) {
+        return stockLevelRepository.save(stockLevel);
     }
 }

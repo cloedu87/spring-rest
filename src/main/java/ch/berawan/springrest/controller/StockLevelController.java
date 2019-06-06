@@ -23,6 +23,11 @@ public class StockLevelController {
     @Resource
     private StockLevelService stockLevelService;
 
+
+    /**
+     * @param id
+     * @return specific StockLevel according to uniq id
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
@@ -32,6 +37,9 @@ public class StockLevelController {
         return stockLevelService.getById(id);
     }
 
+    /**
+     * @return all StockLevels in the database
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
@@ -40,6 +48,28 @@ public class StockLevelController {
         return stockLevelService.getAll();
     }
 
+    /**
+     * @param product
+     * @param warehouse
+     * @param stockLevel StockLevel object who will be added to the database
+     * @return
+     */
+    @RequestMapping(value = "/{product}/{warehouse}")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    public StockLevel addStockLevel(@PathVariable final String product, @PathVariable final String warehouse, @RequestBody final StockLevel stockLevel) {
+
+        //to ensure stock level of requested resource/url will be created
+        stockLevel.setProduct(product);
+        stockLevel.setWarehouse(warehouse);
+
+        return stockLevelService.addStockLevel(stockLevel);
+    }
+
+    /**
+     * @param stockLevels list of stocklevels, which we like to have in the database
+     * @return list of stocklevels, which was written to the database
+     */
     @RequestMapping(value = "/init", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
     @ResponseBody

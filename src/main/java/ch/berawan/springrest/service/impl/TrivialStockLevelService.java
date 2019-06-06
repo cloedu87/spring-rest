@@ -4,6 +4,7 @@ import ch.berawan.springrest.CONSTANTS;
 import ch.berawan.springrest.data.dto.StockLevel;
 import ch.berawan.springrest.service.StockLevelService;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -14,7 +15,7 @@ public class TrivialStockLevelService implements StockLevelService {
 
     @Override
     public StockLevel getById(long id) {
-        return new StockLevel(42l, "trivial product", "trivial warehouse", 42);
+        return CONSTANTS.initialStocklevels().get(0);
     }
 
     @Override
@@ -25,6 +26,11 @@ public class TrivialStockLevelService implements StockLevelService {
 
     @Override
     public List<StockLevel> addStockLevels(final List<StockLevel> stockLevels) {
+        return Collections.EMPTY_LIST;
+    }
+
+    @Override
+    public StockLevel addStockLevel(StockLevel stockLevel) {
         return null;
     }
 }
