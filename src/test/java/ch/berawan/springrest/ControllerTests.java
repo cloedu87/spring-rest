@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -17,6 +18,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -27,9 +29,6 @@ public class ControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @MockBean
-    private StockLevelService stockLevelService;
 
     @MockBean
     private StockLevelRepository stockLevelRepository;
@@ -95,5 +94,39 @@ public class ControllerTests {
 
                 //assert
                 .andExpect(status().isOk()).andExpect(content().string(""));
+    }
+
+    @Test
+    public void testUpdateSpecificStockLevel_positive() throws Exception {
+
+        //arrange
+        given(stockLevelRepository.updateStockLevel(any()))
+                .willReturn(1l);
+
+        //act
+        this.mockMvc.perform(
+                put("/stocklevel/product1/warehouse1")
+                        .content(CONSTANTS.TEST_STOCK_LEVEL_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+        )
+                //assert
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testUpdateSpecificStockLevel_negative() throws Exception {
+
+        //arrange
+        given(stockLevelRepository.updateStockLevel(any()))
+                .willReturn(0l);
+
+        //act
+        this.mockMvc.perform(
+                put("/stocklevel/product1/warehouse1")
+                        .content(CONSTANTS.TEST_STOCK_LEVEL_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+        )
+                //assert
+                .andExpect(status().isBadRequest());
     }
 }

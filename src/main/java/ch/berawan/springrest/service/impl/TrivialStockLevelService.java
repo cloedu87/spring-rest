@@ -33,4 +33,9 @@ public class TrivialStockLevelService implements StockLevelService {
     public StockLevel addStockLevel(StockLevel stockLevel) {
         return null;
     }
+
+    @Override
+    public long updateStockLevel(StockLevel stockLevel) {
+        return 0;
+    }
 }

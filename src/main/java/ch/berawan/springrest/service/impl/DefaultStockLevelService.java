@@ -2,13 +2,21 @@ package ch.berawan.springrest.service.impl;
 
 import ch.berawan.springrest.data.dto.StockLevel;
 import ch.berawan.springrest.data.repository.StockLevelRepository;
+import ch.berawan.springrest.exception.ElementNotModifiedException;
 import ch.berawan.springrest.service.StockLevelService;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class DefaultStockLevelService implements StockLevelService {
+
+    final Logger logger = LoggerFactory.getLogger(DefaultStockLevelService.class);
+
 
     @Resource
     private StockLevelRepository stockLevelRepository;
@@ -42,5 +50,17 @@ public class DefaultStockLevelService implements StockLevelService {
     @Override
     public StockLevel addStockLevel(final StockLevel stockLevel) {
         return stockLevelRepository.save(stockLevel);
+    }
+
+    @Override
+    public long updateStockLevel(final StockLevel stockLevel) {
+
+        final long updateResult = stockLevelRepository.updateStockLevel(stockLevel);
+
+        if (updateResult == 0l) {
+            throw new ElementNotModifiedException("StockLevel Object " + stockLevel.getId() + " not updated");
+        }
+
+        return updateResult;
     }
 }

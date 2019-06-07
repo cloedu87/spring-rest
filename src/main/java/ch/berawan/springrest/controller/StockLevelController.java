@@ -7,6 +7,7 @@ import com.google.common.base.Preconditions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -31,8 +32,8 @@ public class StockLevelController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public StockLevel getById(@PathVariable("id") final long id) {
-        Preconditions.checkNotNull(id);
+    public StockLevel getById(@PathVariable final long id) {
+        Preconditions.checkArgument(!StringUtils.isEmpty(id));
 
         return stockLevelService.getById(id);
     }
@@ -54,16 +55,41 @@ public class StockLevelController {
      * @param stockLevel StockLevel object who will be added to the database
      * @return
      */
-    @RequestMapping(value = "/{product}/{warehouse}")
+    @RequestMapping(value = "/{product}/{warehouse}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public StockLevel addStockLevel(@PathVariable final String product, @PathVariable final String warehouse, @RequestBody final StockLevel stockLevel) {
+
+        Preconditions.checkNotNull(stockLevel);
+        Preconditions.checkArgument(!StringUtils.isEmpty(product));
+        Preconditions.checkArgument(!StringUtils.isEmpty(warehouse));
 
         //to ensure stock level of requested resource/url will be created
         stockLevel.setProduct(product);
         stockLevel.setWarehouse(warehouse);
 
         return stockLevelService.addStockLevel(stockLevel);
+    }
+
+    /**
+     * @param product
+     * @param warehouse
+     * @param stockLevel StockLevel object which will be used to override the StockLevel.level value
+     * @return
+     */
+    @RequestMapping(value = "/{product}/{warehouse}", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    public void updateStockLevel(@PathVariable final String product, @PathVariable final String warehouse, @RequestBody final StockLevel stockLevel) {
+
+        Preconditions.checkNotNull(stockLevel);
+        Preconditions.checkArgument(!StringUtils.isEmpty(product));
+        Preconditions.checkArgument(!StringUtils.isEmpty(warehouse));
+
+        //to ensure stock level of requested resource/url will be created
+        stockLevel.setProduct(product);
+        stockLevel.setWarehouse(warehouse);
+
+        stockLevelService.updateStockLevel(stockLevel);
     }
 
     /**
@@ -74,6 +100,8 @@ public class StockLevelController {
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
     @ResponseBody
     public List<StockLevel> init(@RequestBody final List<StockLevel> stockLevels) {
+
+        Preconditions.checkNotNull(stockLevels);
 
         return stockLevelService.addStockLevels(stockLevels);
     }

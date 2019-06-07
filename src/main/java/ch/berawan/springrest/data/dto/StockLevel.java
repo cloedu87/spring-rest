@@ -21,7 +21,7 @@ public class StockLevel {
 
     @Getter
     @Setter
-    private String product;
+    private String product; // todo: get rid of id and use product as id
 
     @Getter
     @Setter

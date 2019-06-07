@@ -13,4 +13,6 @@ public interface StockLevelService {
     List<StockLevel> addStockLevels(final List<StockLevel> stockLevels);
 
     StockLevel addStockLevel(final StockLevel stockLevel);
+
+    long updateStockLevel(final StockLevel stockLevel);
 }

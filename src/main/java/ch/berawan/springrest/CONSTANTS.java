@@ -29,4 +29,5 @@ public final class CONSTANTS {
     }
 
     public static String TEST_STOCK_LEVELS_JSON = "[{\"id\":1001,\"product\":\"product1\",\"warehouse\":\"warehouse1\",\"level\":33},{\"id\":1002,\"product\":\"product1\",\"warehouse\":\"warehouse2\",\"level\":43},{\"id\":1003,\"product\":\"product1\",\"warehouse\":\"warehouse3\",\"level\":59},{\"id\":1004,\"product\":\"product2\",\"warehouse\":\"warehouse1\",\"level\":54},{\"id\":1005,\"product\":\"product2\",\"warehouse\":\"warehouse2\",\"level\":92},{\"id\":1006,\"product\":\"product3\",\"warehouse\":\"warehouse1\",\"level\":21},{\"id\":1007,\"product\":\"product3\",\"warehouse\":\"warehouse2\",\"level\":44},{\"id\":1008,\"product\":\"product3\",\"warehouse\":\"warehouse3\",\"level\":42},{\"id\":1009,\"product\":\"product3\",\"warehouse\":\"warehouse4\",\"level\":24}]";
+    public static String TEST_STOCK_LEVEL_JSON = "{\"id\":1001,\"product\":\"product1\",\"warehouse\":\"warehouse1\",\"level\":33}";
 }
