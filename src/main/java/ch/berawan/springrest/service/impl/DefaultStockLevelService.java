@@ -2,6 +2,7 @@ package ch.berawan.springrest.service.impl;
 
 import ch.berawan.springrest.data.dto.StockLevel;
 import ch.berawan.springrest.data.repository.StockLevelRepository;
+import ch.berawan.springrest.exception.ElementNotCreatedException;
 import ch.berawan.springrest.exception.ElementNotModifiedException;
 import ch.berawan.springrest.service.StockLevelService;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -49,7 +50,14 @@ public class DefaultStockLevelService implements StockLevelService {
 
     @Override
     public StockLevel addStockLevel(final StockLevel stockLevel) {
-        return stockLevelRepository.save(stockLevel);
+
+        final StockLevel createdStockLevel = stockLevelRepository.save(stockLevel);
+
+        if (createdStockLevel == null) {
+            throw new ElementNotCreatedException("StockLevel " + stockLevel.getId() + " not created");
+        }
+
+        return createdStockLevel;
     }
 
     @Override
@@ -58,7 +66,7 @@ public class DefaultStockLevelService implements StockLevelService {
         final long updateResult = stockLevelRepository.updateStockLevel(stockLevel);
 
         if (updateResult == 0l) {
-            throw new ElementNotModifiedException("StockLevel Object " + stockLevel.getId() + " not updated");
+            throw new ElementNotModifiedException("StockLevel " + stockLevel.getId() + " not updated");
         }
 
         return updateResult;

@@ -11,6 +11,8 @@ public final class CONSTANTS {
 
     private static final List<StockLevel> stockLevels = new LinkedList<>();
 
+    public static final StockLevel STOCK_LEVEL = new StockLevel(1001l, "product1", "warehouse1", 33);
+
     public static List<StockLevel> initialStocklevels() {
 
         if (CollectionUtils.isEmpty(stockLevels)) {

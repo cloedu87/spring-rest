@@ -129,4 +129,38 @@ public class ControllerTests {
                 //assert
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    public void testAddStockLevel_positive() throws Exception {
+
+        //arrange
+        given(stockLevelRepository.save(any()))
+                .willReturn(CONSTANTS.STOCK_LEVEL);
+
+        //act
+        this.mockMvc.perform(
+                post("/stocklevel/product1/warehouse1")
+                        .content(CONSTANTS.TEST_STOCK_LEVEL_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+        )
+                //assert
+                .andExpect(status().isCreated()).andExpect(content().string(CONSTANTS.TEST_STOCK_LEVEL_JSON));
+    }
+
+    @Test
+    public void testAddStockLevel_negative() throws Exception {
+
+        //arrange
+        given(stockLevelRepository.save(any()))
+                .willReturn(null);
+
+        //act
+        this.mockMvc.perform(
+                post("/stocklevel/product1/warehouse1")
+                        .content(CONSTANTS.TEST_STOCK_LEVEL_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+        )
+                //assert
+                .andExpect(status().isBadRequest());
+    }
 }
