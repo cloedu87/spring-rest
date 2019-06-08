@@ -104,6 +104,102 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "add stock level",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1001,\n    \"product\": \"product1\",\n    \"warehouse\": \"warehouse1\",\n    \"level\": 33\n}"
+				},
+				"url": {
+					"raw": "http://{{server}}:{{port}}/stocklevel/product1/warehouse1",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"stocklevel",
+						"product1",
+						"warehouse1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "increment/decrement stock level",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product\": \"product1\",\n    \"warehouse\": \"warehouse1\",\n    \"amount\": 1\n}"
+				},
+				"url": {
+					"raw": "http://{{server}}:{{port}}/stocklevel/product1/warehouse1",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"stocklevel",
+						"product1",
+						"warehouse1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update existing stock level",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1001,\n    \"product\": \"product1\",\n    \"warehouse\": \"warehouse1\",\n    \"level\": 42\n}"
+				},
+				"url": {
+					"raw": "http://{{server}}:{{port}}/stocklevel/product1/warehouse1",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"stocklevel",
+						"product1",
+						"warehouse1"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

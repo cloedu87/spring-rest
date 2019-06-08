@@ -29,7 +29,6 @@ public class StockLevelController {
     @Resource
     private StockLevelService stockLevelService;
 
-
     /**
      * @param id
      * @return specific StockLevel according to uniq id

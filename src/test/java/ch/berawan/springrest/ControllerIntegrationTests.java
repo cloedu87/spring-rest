@@ -1,24 +1,18 @@
 package ch.berawan.springrest;
 
-import ch.berawan.springrest.controller.StockLevelController;
-import ch.berawan.springrest.data.entity.StockLevel;
 import ch.berawan.springrest.data.repository.StockLevelRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.annotation.Resource;
 
-import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -27,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 @SpringBootTest
-public class ControllerTests {
+public class ControllerIntegrationTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -43,10 +37,27 @@ public class ControllerTests {
     }
 
     @Test
+    public void testGetAllStockLevels() throws Exception {
+
+        //arrange
+        initializeTest(); //initialize the db with 9 stock levels
+
+        //act
+        this.mockMvc.perform(
+                get("/stocklevel/all")
+
+                //assert
+        ).andExpect(status().isOk());
+
+        Assert.assertTrue(stockLevelRepository.findAll().size() == 9); //assure there will be 9 returned from the db
+
+    }
+
+    @Test
     public void testDataInit() throws Exception {
 
         //arrange
-        initializeTest();
+        stockLevelRepository.deleteAll();//we wanna have empty db to test plain insert here
 
         //act
         this.mockMvc.perform(
@@ -55,6 +66,8 @@ public class ControllerTests {
                         .contentType(MediaType.APPLICATION_JSON))
                     //assert
                     .andExpect(status().isIAmATeapot());
+
+        Assert.assertTrue(stockLevelRepository.findAll().size() == 9); //assure there will be 9 returned from the db
     }
 
     @Test
