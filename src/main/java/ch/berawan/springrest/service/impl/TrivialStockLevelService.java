@@ -1,7 +1,8 @@
 package ch.berawan.springrest.service.impl;
 
 import ch.berawan.springrest.CONSTANTS;
-import ch.berawan.springrest.data.dto.StockLevel;
+import ch.berawan.springrest.data.dto.ModifyStockLevel;
+import ch.berawan.springrest.data.entity.StockLevel;
 import ch.berawan.springrest.service.StockLevelService;
 
 import java.util.Collections;
@@ -35,7 +36,12 @@ public class TrivialStockLevelService implements StockLevelService {
     }
 
     @Override
-    public long updateStockLevel(StockLevel stockLevel) {
-        return 0;
+    public void updateStockLevel(StockLevel stockLevel) {
+        
+    }
+
+    @Override
+    public void modifyStockLevel(final ModifyStockLevel modifyStockLevel) {
+
     }
 }

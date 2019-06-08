@@ -1,11 +1,10 @@
-package ch.berawan.springrest.data.dto;
+package ch.berawan.springrest.data.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @AllArgsConstructor
@@ -13,11 +12,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "StockLevel")
 public class StockLevel {
 
+    public StockLevel(final String product, final String warehouse, final int level) {
+        this.product = product;
+        this.warehouse = warehouse;
+        this.level = level;
+    }
+
     @Getter
     @Setter
     @Id
     //@Indexed(unique = true) todo: check why this leads to an MongoDbException during build/test
-    private Long id;
+    private String id;
 
     @Getter
     @Setter

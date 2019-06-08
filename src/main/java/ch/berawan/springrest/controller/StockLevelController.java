@@ -1,13 +1,18 @@
 package ch.berawan.springrest.controller;
 
-import ch.berawan.springrest.data.dto.StockLevel;
+import ch.berawan.springrest.data.dto.ModifyStockLevel;
+import ch.berawan.springrest.data.entity.StockLevel;
 import ch.berawan.springrest.service.StockLevelService;
 import ch.berawan.springrest.service.impl.DefaultStockLevelService;
-import com.google.common.base.Preconditions;
+
+import static com.google.common.base.Preconditions.*;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
+
+import static org.springframework.util.StringUtils.*;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -33,7 +38,7 @@ public class StockLevelController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public StockLevel getById(@PathVariable final long id) {
-        Preconditions.checkArgument(!StringUtils.isEmpty(id));
+        checkArgument(!isEmpty(id));
 
         return stockLevelService.getById(id);
     }
@@ -60,9 +65,9 @@ public class StockLevelController {
     @ResponseBody
     public StockLevel addStockLevel(@PathVariable final String product, @PathVariable final String warehouse, @RequestBody final StockLevel stockLevel) {
 
-        Preconditions.checkNotNull(stockLevel);
-        Preconditions.checkArgument(!StringUtils.isEmpty(product));
-        Preconditions.checkArgument(!StringUtils.isEmpty(warehouse));
+        checkNotNull(stockLevel);
+        checkArgument(!isEmpty(product));
+        checkArgument(!isEmpty(warehouse));
 
         //to ensure stock level of requested resource/url will be created
         stockLevel.setProduct(product);
@@ -81,11 +86,11 @@ public class StockLevelController {
     @ResponseStatus(HttpStatus.OK)
     public void updateStockLevel(@PathVariable final String product, @PathVariable final String warehouse, @RequestBody final StockLevel stockLevel) {
 
-        Preconditions.checkNotNull(stockLevel);
-        Preconditions.checkArgument(!StringUtils.isEmpty(product));
-        Preconditions.checkArgument(!StringUtils.isEmpty(warehouse));
+        checkNotNull(stockLevel);
+        checkArgument(!isEmpty(product));
+        checkArgument(!isEmpty(warehouse));
 
-        //to ensure stock level of requested resource/url will be created
+        //to ensure stock level of requested resource/url will be modified
         stockLevel.setProduct(product);
         stockLevel.setWarehouse(warehouse);
 
@@ -101,9 +106,24 @@ public class StockLevelController {
     @ResponseBody
     public List<StockLevel> init(@RequestBody final List<StockLevel> stockLevels) {
 
-        Preconditions.checkNotNull(stockLevels);
+        checkNotNull(stockLevels);
 
         return stockLevelService.addStockLevels(stockLevels);
+    }
+
+    @RequestMapping(value = "/{product}/{warehouse}", method = RequestMethod.PATCH)
+    @ResponseStatus(HttpStatus.OK)
+    public void modifyStockLevel(@PathVariable final String product, @PathVariable final String warehouse, @RequestBody final ModifyStockLevel modifyStockLevel) {
+
+        checkArgument(!isEmpty(product));
+        checkArgument(!isEmpty(warehouse));
+        checkNotNull(modifyStockLevel);
+
+        //to ensure stock level of requested resource/url will be modified
+        modifyStockLevel.setProduct(product);
+        modifyStockLevel.setWarehouse(warehouse);
+
+        stockLevelService.modifyStockLevel(modifyStockLevel);
     }
 
     @Bean

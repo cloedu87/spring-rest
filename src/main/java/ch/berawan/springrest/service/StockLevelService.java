@@ -1,6 +1,7 @@
 package ch.berawan.springrest.service;
 
-import ch.berawan.springrest.data.dto.StockLevel;
+import ch.berawan.springrest.data.dto.ModifyStockLevel;
+import ch.berawan.springrest.data.entity.StockLevel;
 
 import java.util.List;
 
@@ -14,5 +15,7 @@ public interface StockLevelService {
 
     StockLevel addStockLevel(final StockLevel stockLevel);
 
-    long updateStockLevel(final StockLevel stockLevel);
+    void updateStockLevel(final StockLevel stockLevel);
+
+    void modifyStockLevel(final ModifyStockLevel modifyStockLevel);
 }

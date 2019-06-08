@@ -1,17 +1,16 @@
 package ch.berawan.springrest.service.impl;
 
-import ch.berawan.springrest.data.dto.StockLevel;
+import ch.berawan.springrest.data.dto.ModifyStockLevel;
+import ch.berawan.springrest.data.entity.StockLevel;
 import ch.berawan.springrest.data.repository.StockLevelRepository;
 import ch.berawan.springrest.exception.ElementNotCreatedException;
 import ch.berawan.springrest.exception.ElementNotModifiedException;
 import ch.berawan.springrest.service.StockLevelService;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class DefaultStockLevelService implements StockLevelService {
@@ -40,10 +39,12 @@ public class DefaultStockLevelService implements StockLevelService {
 
         return stockLevelRepository.saveAll(stockLevels).stream().sorted(
                 (final StockLevel o1, final StockLevel o2) -> {
-                    if (o1.getProduct().compareTo(o2.getProduct()) > 0)
+                    if (o1.getProduct().compareTo(o2.getProduct()) > 0) {
                         return 1;
-                    else
+                    }
+                    else {
                         return -1;
+                    }
                 }
         ).collect(Collectors.toList());
     }
@@ -61,14 +62,28 @@ public class DefaultStockLevelService implements StockLevelService {
     }
 
     @Override
-    public long updateStockLevel(final StockLevel stockLevel) {
+    public void updateStockLevel(final StockLevel stockLevel) {
 
         final long updateResult = stockLevelRepository.updateStockLevel(stockLevel);
 
         if (updateResult == 0l) {
-            throw new ElementNotModifiedException("StockLevel " + stockLevel.getId() + " not updated");
+            throw new ElementNotModifiedException(
+                    "StockLevel 'product: " + stockLevel.getProduct() +
+                            ", warehouse: " + stockLevel.getWarehouse() +
+                            ", amount inc/dec: " + stockLevel.getLevel() + "' not updated");
         }
+    }
 
-        return updateResult;
+    @Override
+    public void modifyStockLevel(final ModifyStockLevel modifyStockLevel) {
+
+        final long modifyResult = stockLevelRepository.modifyStockLevel(modifyStockLevel);
+
+        if (modifyResult != 1l) {
+            throw new ElementNotModifiedException(
+                    "StockLevel 'product: " + modifyStockLevel.getProduct() +
+                            ", warehouse: " + modifyStockLevel.getWarehouse() +
+                            ", amount inc/dec: " + modifyStockLevel.getAmount() + "' not modified");
+        }
     }
 }
