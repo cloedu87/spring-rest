@@ -1,0 +1,12 @@
+version: '3'
+services:
+  springredis:
+    build: .
+    ports:
+      - "8080:8080"
+    links:
+      - "mongodb:mongodb"
+  mongodb:
+    image: "mongo:4.0.10-xenial"
+    ports:
+      - "27017:27017"
