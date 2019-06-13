@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,10 +18,8 @@ public class DefaultStockLevelService implements StockLevelService {
 
     final Logger logger = LoggerFactory.getLogger(DefaultStockLevelService.class);
 
-
     @Resource
     private StockLevelRepository stockLevelRepository;
-
 
     @Override
     public StockLevel getById(final long id) {
@@ -38,14 +37,7 @@ public class DefaultStockLevelService implements StockLevelService {
     public List<StockLevel> addStockLevels(final List<StockLevel> stockLevels) {
 
         return stockLevelRepository.saveAll(stockLevels).stream().sorted(
-                (final StockLevel o1, final StockLevel o2) -> {
-                    if (o1.getProduct().compareTo(o2.getProduct()) > 0) {
-                        return 1;
-                    }
-                    else {
-                        return -1;
-                    }
-                }
+                Comparator.comparing(StockLevel::getProduct)
         ).collect(Collectors.toList());
     }
 
