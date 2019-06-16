@@ -1,7 +1,7 @@
-package ch.berawan.springrest.data.repository;
+package ch.berawan.springrest.app.data.repository;
 
-import ch.berawan.springrest.data.dto.ModifyStockLevel;
-import ch.berawan.springrest.data.entity.StockLevel;
+import ch.berawan.springrest.app.data.dto.ModifyStockLevel;
+import ch.berawan.springrest.app.data.entity.StockLevel;
 
 public interface StockLevelRepositoryCustom {
 

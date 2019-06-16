@@ -1,4 +1,4 @@
-package ch.berawan.springrest.data.entity;
+package ch.berawan.springrest.app.data.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
