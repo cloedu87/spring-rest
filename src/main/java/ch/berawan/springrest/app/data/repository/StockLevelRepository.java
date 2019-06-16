@@ -1,6 +1,6 @@
-package ch.berawan.springrest.data.repository;
+package ch.berawan.springrest.app.data.repository;
 
-import ch.berawan.springrest.data.entity.StockLevel;
+import ch.berawan.springrest.app.data.entity.StockLevel;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 

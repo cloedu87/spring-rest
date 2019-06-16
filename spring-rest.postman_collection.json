@@ -7,6 +7,164 @@
 	},
 	"item": [
 		{
+			"name": "get access token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5ad4927f-1c5e-4210-b096-5886c27f0842",
+						"exec": [
+							"pm.test(\"get access token\", function () {",
+							"    ",
+							"    pm.response.to.have.jsonBody('access_token')",
+							"    ",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    pm.globals.set(\"access_token\", jsonData.access_token); // save access token as global variable to work with",
+							"    pm.globals.set(\"refresh_token\", jsonData.refresh_token); // save refresh token as global variable to work with",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "spring-rest-secret",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "spring-rest-client",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "awan",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "berawan",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{server}}:{{port}}/oauth/token",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get access token from refresh token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5ad4927f-1c5e-4210-b096-5886c27f0842",
+						"exec": [
+							"pm.test(\"get access token\", function () {",
+							"    ",
+							"    pm.response.to.have.jsonBody('access_token')",
+							"    ",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    pm.globals.set(\"access_token\", jsonData.access_token); // save new access token as global variable to work with",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "spring-rest-secret",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "spring-rest-client",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "{{refresh_token}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{server}}:{{port}}/oauth/token",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "init stocklevels",
 			"request": {
 				"method": "POST",
@@ -15,6 +173,11 @@
 						"key": "Content-Type",
 						"name": "Content-Type",
 						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
 						"type": "text"
 					}
 				],
@@ -50,6 +213,11 @@
 						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
 					}
 				],
 				"body": {
@@ -84,6 +252,11 @@
 						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
 					}
 				],
 				"body": {
@@ -115,6 +288,11 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
 					}
 				],
 				"body": {
@@ -146,6 +324,11 @@
 						"key": "Content-Type",
 						"name": "Content-Type",
 						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
 						"type": "text"
 					}
 				],
@@ -179,6 +362,11 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
 					}
 				],
 				"body": {
@@ -196,6 +384,13 @@
 						"stocklevel",
 						"product1",
 						"warehouse1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},

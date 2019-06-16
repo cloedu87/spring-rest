@@ -1,0 +1,29 @@
+package ch.berawan.springrest.security;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+
+@Configuration
+@EnableResourceServer
+public class ResourceServer extends ResourceServerConfigurerAdapter {
+
+    private static final String RESOURCE_ID = "spring-rest";
+
+    @Override
+    public void configure(final ResourceServerSecurityConfigurer resources) {
+        resources.resourceId(RESOURCE_ID);
+    }
+
+    @Override
+    public void configure(final HttpSecurity http) throws Exception {
+        http
+                .csrf()
+                .disable()
+                .authorizeRequests()
+                .anyRequest()
+                .authenticated();
+    }
+}

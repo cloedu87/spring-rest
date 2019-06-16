@@ -1,6 +1,6 @@
 version: '3'
 services:
-  springredis:
+  stock-level-service:
     build: .
     ports:
       - "8080:8080"

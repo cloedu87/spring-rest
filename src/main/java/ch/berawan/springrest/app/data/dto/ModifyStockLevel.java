@@ -1,4 +1,4 @@
-package ch.berawan.springrest.data.dto;
+package ch.berawan.springrest.app.data.dto;
 
 
 import lombok.AllArgsConstructor;
