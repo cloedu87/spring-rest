@@ -8,15 +8,17 @@ import ch.berawan.springrest.exception.ElementNotModifiedException;
 import ch.berawan.springrest.service.StockLevelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DefaultStockLevelService implements StockLevelService {
+@Service
+public class CustomStockLevelService implements StockLevelService {
 
-    final Logger logger = LoggerFactory.getLogger(DefaultStockLevelService.class);
+    final Logger logger = LoggerFactory.getLogger(CustomStockLevelService.class);
 
     @Resource
     private StockLevelRepository stockLevelRepository;
