@@ -1,7 +1,7 @@
 package ch.berawan.springrest;
 
-import ch.berawan.springrest.data.entity.User;
-import ch.berawan.springrest.data.repository.UserRepository;
+import ch.berawan.springrest.security.data.entity.User;
+import ch.berawan.springrest.security.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

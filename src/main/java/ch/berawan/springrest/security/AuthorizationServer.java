@@ -1,6 +1,6 @@
 package ch.berawan.springrest.security;
 
-import ch.berawan.springrest.service.impl.CustomUserDetailsService;
+import ch.berawan.springrest.security.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,8 +1,7 @@
-package ch.berawan.springrest.data.repository;
+package ch.berawan.springrest.app.data.repository;
 
-import ch.berawan.springrest.data.dto.ModifyStockLevel;
-import ch.berawan.springrest.data.entity.StockLevel;
-import com.mongodb.client.result.UpdateResult;
+import ch.berawan.springrest.app.data.dto.ModifyStockLevel;
+import ch.berawan.springrest.app.data.entity.StockLevel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;

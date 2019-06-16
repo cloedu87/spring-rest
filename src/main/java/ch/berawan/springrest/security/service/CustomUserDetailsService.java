@@ -1,7 +1,7 @@
-package ch.berawan.springrest.service.impl;
+package ch.berawan.springrest.security.service;
 
-import ch.berawan.springrest.data.entity.User;
-import ch.berawan.springrest.data.repository.UserRepository;
+import ch.berawan.springrest.security.data.entity.User;
+import ch.berawan.springrest.security.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

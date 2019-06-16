@@ -1,9 +1,9 @@
-package ch.berawan.springrest.controller;
+package ch.berawan.springrest.app.controller;
 
-import ch.berawan.springrest.data.dto.ModifyStockLevel;
-import ch.berawan.springrest.data.entity.StockLevel;
-import ch.berawan.springrest.service.StockLevelService;
-import ch.berawan.springrest.service.impl.CustomStockLevelService;
+import ch.berawan.springrest.app.data.dto.ModifyStockLevel;
+import ch.berawan.springrest.app.data.entity.StockLevel;
+import ch.berawan.springrest.app.service.StockLevelService;
+import ch.berawan.springrest.app.service.CustomStockLevelService;
 
 import static com.google.common.base.Preconditions.*;
 

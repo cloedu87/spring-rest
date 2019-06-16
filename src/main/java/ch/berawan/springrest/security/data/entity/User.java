@@ -1,4 +1,4 @@
-package ch.berawan.springrest.data.entity;
+package ch.berawan.springrest.security.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

@@ -1,11 +1,10 @@
-package ch.berawan.springrest.service.impl;
+package ch.berawan.springrest.app.service;
 
-import ch.berawan.springrest.data.dto.ModifyStockLevel;
-import ch.berawan.springrest.data.entity.StockLevel;
-import ch.berawan.springrest.data.repository.StockLevelRepository;
-import ch.berawan.springrest.exception.ElementNotCreatedException;
-import ch.berawan.springrest.exception.ElementNotModifiedException;
-import ch.berawan.springrest.service.StockLevelService;
+import ch.berawan.springrest.app.data.dto.ModifyStockLevel;
+import ch.berawan.springrest.app.data.entity.StockLevel;
+import ch.berawan.springrest.app.data.repository.StockLevelRepository;
+import ch.berawan.springrest.app.exception.ElementNotCreatedException;
+import ch.berawan.springrest.app.exception.ElementNotModifiedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -60,6 +59,7 @@ public class CustomStockLevelService implements StockLevelService {
 
         final long updateResult = stockLevelRepository.updateStockLevel(stockLevel);
 
+        // be aware: if new data is exactly same like old data, updateResult will be '0' as well
         if (updateResult == 0l) {
             throw new ElementNotModifiedException(
                     "StockLevel 'product: " + stockLevel.getProduct() +

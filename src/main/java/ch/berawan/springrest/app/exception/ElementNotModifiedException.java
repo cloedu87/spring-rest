@@ -1,4 +1,4 @@
-package ch.berawan.springrest.exception;
+package ch.berawan.springrest.app.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

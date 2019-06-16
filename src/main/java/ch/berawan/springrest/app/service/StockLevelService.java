@@ -1,7 +1,7 @@
-package ch.berawan.springrest.service;
+package ch.berawan.springrest.app.service;
 
-import ch.berawan.springrest.data.dto.ModifyStockLevel;
-import ch.berawan.springrest.data.entity.StockLevel;
+import ch.berawan.springrest.app.data.dto.ModifyStockLevel;
+import ch.berawan.springrest.app.data.entity.StockLevel;
 
 import java.util.List;
 

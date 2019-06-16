@@ -1,6 +1,6 @@
 package ch.berawan.springrest;
 
-import ch.berawan.springrest.data.repository.StockLevelRepository;
+import ch.berawan.springrest.app.data.repository.StockLevelRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

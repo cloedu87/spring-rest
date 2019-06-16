@@ -1,6 +1,6 @@
 package ch.berawan.springrest;
 
-import ch.berawan.springrest.data.entity.StockLevel;
+import ch.berawan.springrest.app.data.entity.StockLevel;
 import org.springframework.util.CollectionUtils;
 
 import java.util.LinkedList;
